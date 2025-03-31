@@ -9,8 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    Dotenv\Dotenv::createImmutable(__DIR__)->load();
+
     // Verify the reCAPTCHA
-    $recaptcha_secret_key = '6Lf9lc8kAAAAAGUJOxLelJ_EYn0UsGMri-eM1Zsj';
+    $recaptcha_secret_key = getenv('RECAPTCHA_SECRET_KEY');
     $recaptcha_response = $_POST['g-recaptcha-response'];
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_data = array(
